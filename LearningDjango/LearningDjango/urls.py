@@ -4,13 +4,15 @@ Definition of urls for LearningDjango.
 
 from datetime import datetime
 from django.urls import path
+from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 from app import forms, views
 
+import HelloDjangoApp.views
+
 
 urlpatterns = [
-    path('', views.home, name='home'),
     path('contact/', views.contact, name='contact'),
     path('about/', views.about, name='about'),
     path('login/',
@@ -27,4 +29,6 @@ urlpatterns = [
          name='login'),
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     path('admin/', admin.site.urls),
+    url(r'^$', HelloDjangoApp.views.index, name='index'),
+    url(r'^home$', HelloDjangoApp.views.index, name='home'),
 ]
